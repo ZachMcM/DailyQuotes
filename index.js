@@ -17,8 +17,8 @@ pm2.connect(function (err) {
   });
 });
 
-const accountSid = 'AC47ab3d1887391d2a1eddd68592702fc8'; // Your Account SID from www.twilio.com/console
-const authToken = '6ee669ef64e5b3237953c58833a48a5b'; // Your Auth Token from www.twilio.com/console
+const accountSid = 'account_sid'; // Your Account SID from www.twilio.com/console
+const authToken = 'auth_token'; // Your Auth Token from www.twilio.com/console
 
 const twilio = require('twilio');
 const client = new twilio(accountSid, authToken);
@@ -32,7 +32,7 @@ const options = {
   url: 'https://quotes15.p.rapidapi.com/quotes/random/',
   params: {language_code: 'en'},
   headers: {
-    'X-RapidAPI-Key': 'ee59770615msh8df1c75fecef67dp12f3dfjsncd71ed95720b',
+    'X-RapidAPI-Key': 'rapidapi_key',
     'X-RapidAPI-Host': 'quotes15.p.rapidapi.com'
   }
 };
@@ -43,8 +43,8 @@ cron.schedule('30 6 * * *', () => {
     client.messages
     .create({
       body: "\nQuote: " + response.data.content + "\n " + "\nAuthor: " + response.data.originator.name + "\n " + "\nLink: " + response.data.url, 
-      from: '+19706382686',
-      to: '+17149511714', // Text this number from: '+19706382686', // From a valid Twilio number
+      from: '+twilio_number',
+      to: '+your_number', 
      })
     .then(message => console.log(message.sid));
   }).catch(function (error) {
@@ -59,8 +59,8 @@ cron.schedule('0 22 * * *', () => {
     client.messages
     .create({
       body: "\nQuote: " + response.data.content + "\n " + "\nAuthor: " + response.data.originator.name + "\n " + "\nLink: " + response.data.url, 
-      from: '+19706382686',
-      to: '+17149511714', // Text this number from: '+19706382686', // From a valid Twilio number
+      from: '+twilio_number',
+      to: '+your_number', // Text this number from: '+19706382686', // From a valid Twilio number
      })
     .then(message => console.log(message.sid));
   }).catch(function (error) {
